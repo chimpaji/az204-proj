@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [name, setName] = useState('world');
+  const [name, setName] = useState('London');
   const [greeting, setGreeting] = useState<string | null>(null);
   const url = '/api/get-weather';
 
@@ -14,7 +14,7 @@ function App() {
   const fetchData = async (name?: string) => {
     const query = name ? `?name=${name}` : '';
     const response = await fetch(`${url}${query}`);
-    const data = await response.text();
+    const data = await response.json();
     setGreeting(data);
     console.log({ data });
   };
@@ -25,8 +25,8 @@ function App() {
         <div className='App'>
           {greeting ? (
             <div>
-              <h1>Greeting</h1>
-              <p>{greeting}</p>
+              <h1>Weather</h1>
+              <p>{JSON.stringify(greeting, null, 2)}</p>
             </div>
           ) : (
             <p>Loading...</p>
@@ -35,7 +35,7 @@ function App() {
       </div>
       {/* create div that set name */}
       <div>
-        <p>Name: {name}</p>
+        <p>City: {name}</p>
         <input
           type='text'
           value={name}
@@ -46,7 +46,7 @@ function App() {
             await fetchData(name);
           }}
         >
-          Set name
+          Set city
         </button>
       </div>
     </>
