@@ -2,10 +2,14 @@ import './App.css';
 
 import { useEffect, useState } from 'react';
 
+const azFuncUrl =
+  'https://getweathertesttest1212.azurewebsites.net/api/get-weather';
+
 function App() {
   const [name, setName] = useState('London');
   const [greeting, setGreeting] = useState<string | null>(null);
-  const url = '/api/get-weather';
+  // const isDev = process.env.NODE_ENV === 'development';
+  const url = azFuncUrl;
 
   useEffect(() => {
     fetchData();
