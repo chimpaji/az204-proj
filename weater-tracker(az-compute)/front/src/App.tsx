@@ -8,8 +8,8 @@ const azFuncUrl =
 function App() {
   const [name, setName] = useState('London');
   const [greeting, setGreeting] = useState<string | null>(null);
-  // const isDev = process.env.NODE_ENV === 'development';
-  const url = azFuncUrl;
+  const isDev = process.env.NODE_ENV === 'development';
+  const url = isDev ? '/api/get-weather' : azFuncUrl;
 
   useEffect(() => {
     fetchData();

@@ -11,7 +11,9 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
+    "@azure/cosmos": "^4.0.0",
     "@azure/functions": "^4.0.0",
+    "mongodb": "^6.4.0",
     "openweather-api-node": "^3.1.2"
   },
   "devDependencies": {
