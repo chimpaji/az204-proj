@@ -19,8 +19,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log({ env: process.env.NODE_ENV });
-
   const fetchData = async (name?: string) => {
     const query = name ? `?name=${name}` : '';
     const response = await fetch(`${getWeatherUrl}${query}`);
@@ -85,7 +83,6 @@ function App() {
           onClick={async () => {
             await subscribeWeather(email, name);
             setEmail('');
-            alert('Subscribed!');
           }}
         >
           Subscribe
