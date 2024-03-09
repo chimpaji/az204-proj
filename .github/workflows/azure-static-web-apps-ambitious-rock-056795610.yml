@@ -5,13 +5,13 @@ on:
     paths:
       - 'weater-tracker(az-compute)/**'
     branches:
-      - something
+      - main
   pull_request:
     paths:
       - 'weater-tracker(az-compute)/**'
     types: [opened, synchronize, reopened, closed]
     branches:
-      - something
+      - main
 
 jobs:
   build_and_deploy_job:
