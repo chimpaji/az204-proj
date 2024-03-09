@@ -65,7 +65,7 @@ function App() {
             await fetchData(name);
           }}
         >
-          Set city
+          Set citys
         </button>
       </div>
 
