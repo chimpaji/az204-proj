@@ -2,9 +2,13 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
+    paths:
+      - 'weater-tracker(az-compute)/**'
     branches:
       - something
   pull_request:
+    paths:
+      - 'weater-tracker(az-compute)/**'
     types: [opened, synchronize, reopened, closed]
     branches:
       - something
