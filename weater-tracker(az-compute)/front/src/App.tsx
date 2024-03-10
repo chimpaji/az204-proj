@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
-const appInsights = new ApplicationInsights({
-  config: {
-    connectionString: import.meta.env.VITE_INST_CONNECTSTRING,
-    /* ...Other Configuration Options... */
-  },
-});
-appInsights.loadAppInsights();
-appInsights.trackPageView();
-
 function App() {
+  const appInsights = new ApplicationInsights({
+    config: {
+      connectionString: import.meta.env.VITE_INST_CONNECTSTRING,
+      /* ...Other Configuration Options... */
+    },
+  });
+  appInsights.loadAppInsights();
+  appInsights.trackPageView();
+
   return (
     <div className='App'>
       <WeatherSubscription />
