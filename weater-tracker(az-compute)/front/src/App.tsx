@@ -2,13 +2,6 @@ import './App.css';
 
 import { useEffect, useState } from 'react';
 
-// import appInsights from 'applicationinsights';
-
-// appInsights
-//   .setup(process.env.VITE_INST_KEY)
-//   .setAutoCollectRequests(true)
-//   .start();
-
 function App() {
   return (
     <div className='App'>

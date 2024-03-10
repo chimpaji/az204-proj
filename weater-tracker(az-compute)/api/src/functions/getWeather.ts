@@ -5,7 +5,7 @@ import {
   app,
 } from '@azure/functions';
 
-import { OpenWeatherAPI } from 'openweather-api-node';
+import { weather } from '../config';
 
 export async function getWeather(
   request: HttpRequest,
@@ -16,11 +16,7 @@ export async function getWeather(
   const cityName =
     request.query.get('name') || (await request.text()) || 'London';
 
-  let weather = new OpenWeatherAPI({
-    key: process.env.WEATHER_API_KEY,
-    locationName: cityName,
-    units: 'imperial',
-  });
+  weather.setLocationByName(cityName);
 
   const res = await weather.getCurrent();
 

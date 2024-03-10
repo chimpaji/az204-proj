@@ -3,10 +3,8 @@ import {
   HttpResponseInit,
   InvocationContext,
   app,
-  output,
 } from '@azure/functions';
-
-import { MongoClient } from 'mongodb';
+import { containerName, cosmosClient, databaseName } from '../config';
 
 interface MyCosmosItem {
   id: string;
@@ -14,7 +12,7 @@ interface MyCosmosItem {
   city: string;
 }
 
-export async function subscribe(
+export async function subscribe1(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
@@ -31,29 +29,32 @@ export async function subscribe(
       body: 'Please pass email and city in the request body',
     };
   }
-
-  const mongoClient = await MongoClient.connect(
-    process.env.CosmosDbConnectionSetting
-  );
-  const cluster = await mongoClient.connect();
-  const db = cluster.db('my-database');
-  const collection = db.collection('my-container');
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  if (!emailRegex.test(email)) {
+    return {
+      status: 400,
+      body: 'Invalid email format',
+    };
+  }
 
   const item: MyCosmosItem = {
     id: email,
     email: email,
     city: city,
   };
-  await collection.insertOne(item);
+
+  const database = cosmosClient.database(databaseName);
+  const container = database.container(containerName);
+  const { resource: createdItem } = await container.items.create(item);
 
   return {
     status: 200,
-    body: JSON.stringify({ item }),
+    body: JSON.stringify({ createdItem }),
   };
 }
 
-app.http('subscribe', {
+app.http('subscribe1', {
   methods: ['POST'],
   authLevel: 'anonymous',
-  handler: subscribe,
+  handler: subscribe1,
 });
