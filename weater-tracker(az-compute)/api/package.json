@@ -13,7 +13,7 @@
   "dependencies": {
     "@azure/cosmos": "^4.0.0",
     "@azure/functions": "^4.0.0",
-    "i": "^0.3.7",
+    "applicationinsights": "^2.9.5",
     "mailgun-js": "^0.22.0",
     "mongodb": "^6.4.0",
     "npm": "^10.5.0",

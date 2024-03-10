@@ -1,3 +1,5 @@
+let appInsights = require('applicationinsights');
+
 import {
   HttpRequest,
   HttpResponseInit,
@@ -11,6 +13,7 @@ export async function getWeather(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
+  appInsights.start();
   context.log(`Http function processed request for url "${request.url}"`);
 
   const cityName =
