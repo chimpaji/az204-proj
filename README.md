@@ -1,6 +1,14 @@
 ## Weather Tracker (Develop Azure compute solutions)
 
+### screenshot
+
+![Screenshot](screenshot.png)
+
 A web application that allows users to track weather updates in real-time for their chosen cities. The system also triggers Azure Functions for alerts(sending email) when a specific weather threshold is met (like if it's windy).
+
+### Architecture
+
+![Architecture](achitect.png)
 
 ### Infrastructure
 
