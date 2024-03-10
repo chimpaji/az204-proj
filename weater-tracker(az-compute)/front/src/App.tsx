@@ -77,7 +77,7 @@ function WeatherSubscription() {
       <button onClick={getWeather}>Get Weather</button>
       <button onClick={subscribe}>Subscribe</button>
       {weatherData && <p>Weather Data: {JSON.stringify(weatherData)}</p>}
-      {subscriptionStatus && <p>Subscription Status: {subscriptionStatus}</p>}
+      {subscriptionStatus && <p>Subscriptionz Status: {subscriptionStatus}</p>}
     </div>
   );
 }
