@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
 function App() {
+  console.log('instKey=>', import.meta.env.VITE_INST_CONNECTSTRING);
   const appInsights = new ApplicationInsights({
     config: {
       connectionString: import.meta.env.VITE_INST_CONNECTSTRING,
