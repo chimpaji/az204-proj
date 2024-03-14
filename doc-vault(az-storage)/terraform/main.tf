@@ -29,13 +29,18 @@ resource "azurerm_service_plan" "sp" {
 
 # create azure web service for node.js(nextjs)
 resource "azurerm_windows_web_app" "web" {
-  name                = "web-${random_id.myrandom.hex}"
+  name                = "web-8d3ebbb5eba8"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.sp.location
   service_plan_id     = azurerm_service_plan.sp.id
 
   site_config {
+    application_stack {
+      current_stack = "node"
+      node_version  = "~18"
+    }
     always_on = false
+
     cors {
       allowed_origins = ["*"]
     }
