@@ -6,21 +6,21 @@ name: Doc vault - Build and deploy Node.js app to Azure Web App - web-8d3ebbb5eb
 on:
   push:
     paths:
-      - 'doc-vault-az-storage-/web-app/**'
+      - 'doc-vault-az-storage/web-app/**'
     branches:
       - main
   workflow_dispatch:
 
 env:
   AZURE_WEBAPP_NAME: web-8d3ebbb5eba8
-  AZURE_WEBAPP_PACKAGE_PATH: 'doc-vault-az-storage-/web-app'
+  AZURE_WEBAPP_PACKAGE_PATH: 'doc-vault-az-storage/web-app'
   NODE_VERSION: '18.x'
 
 jobs:
   build:
     defaults:
       run:
-        working-directory: doc-vault-az-storage-/web-app
+        working-directory: doc-vault-az-storage/web-app
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release.zip
-          path: doc-vault-az-storage-/web-app/release.zip
+          path: doc-vault-az-storage/web-app/release.zip
 
   deploy:
     runs-on: ubuntu-latest
