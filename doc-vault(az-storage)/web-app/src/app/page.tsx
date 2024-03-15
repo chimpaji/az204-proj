@@ -15,7 +15,7 @@ export default function Home() {
             target='_blank'
             rel='noopener noreferrer'
           >
-            Byxxf{' '}
+            Byxxfx{' '}
             <Image
               src='/vercel.svg'
               alt='Vercel Logo'
