@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Weather app - Build and deploy Node.js app to Azure Web App
 
 on:
   push:
