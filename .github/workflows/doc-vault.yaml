@@ -13,14 +13,14 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: web-8d3ebbb5eba8
-  AZURE_WEBAPP_PACKAGE_PATH: 'doc-vault(az-storage)/web-app'
+  AZURE_WEBAPP_PACKAGE_PATH: 'doc-vault-az-storage-/web-app'
   NODE_VERSION: '18.x'
 
 jobs:
   build:
     defaults:
       run:
-        working-directory: doc-vault(az-storage)/web-app
+        working-directory: doc-vault-az-storage-/web-app
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release.zip
-          path: doc-vault(az-storage)/web-app/release.zip
+          path: doc-vault-az-storage-/web-app/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,11 +61,11 @@ jobs:
         with:
           name: release.zip
       - name: Create target directory
-        run: mkdir -p doc-vault\(az-storage\)/output
+        run: mkdir -p doc-vault-az-storage/output
       - name: unzip artifact for deployment
         run: |
-          unzip release.zip -d doc-vault\(az-storage\)/output
-          ls doc-vault\(az-storage\)/output
+          unzip release.zip -d doc-vault-az-storage/output
+          ls doc-vault-az-storage/output
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -74,4 +74,4 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
           publish-profile: ${{ secrets.DOC_VAULT_AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: doc-vault\(az-storage\)/output
+          package: doc-vault-az-storage/output
