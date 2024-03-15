@@ -21,7 +21,7 @@ jobs:
     defaults:
       run:
         working-directory: doc-vault(az-storage)/web-app
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: Compress-Archive -Path ./* -Destination release.zip
+        run: zip release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -63,8 +63,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: release.zip
-      - name: Unzip artifact for deployment
-        run: Expand-Archive -Path release.zip -DestinationPath .
+      - name: unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
