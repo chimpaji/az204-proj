@@ -6,7 +6,7 @@ name: Doc vault - Build and deploy Node.js app to Azure Web App - web-8d3ebbb5eb
 on:
   push:
     paths:
-      - 'doc-vault(az-storage)/web-app/**'
+      - 'doc-vault-az-storage-/web-app/**'
     branches:
       - main
   workflow_dispatch:
