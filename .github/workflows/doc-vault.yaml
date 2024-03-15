@@ -47,9 +47,6 @@ jobs:
           path: doc-vault(az-storage)/web-app/release.zip
 
   deploy:
-    defaults:
-      run:
-        working-directory: doc-vault(az-storage)/web-app
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -64,7 +61,7 @@ jobs:
         with:
           name: release.zip
       - name: unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip doc-vault(az-storage)/web-app/release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
