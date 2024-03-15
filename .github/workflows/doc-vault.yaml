@@ -21,7 +21,7 @@ jobs:
     defaults:
       run:
         working-directory: doc-vault(az-storage)/web-app
-    runs-on: windows-latest
+    runs-on: linux-latest
 
     steps:
       - uses: actions/checkout@v4
