@@ -61,9 +61,11 @@ jobs:
         with:
           name: release.zip
       - name: Create target directory
-        run: mkdir -p doc-vault\(az-storage\)/web-app
+        run: mkdir -p doc-vault\(az-storage\)/output
       - name: unzip artifact for deployment
-        run: unzip release.zip -d doc-vault\(az-storage\)/output
+        run: |
+          unzip release.zip -d doc-vault\(az-storage\)/output
+          ls doc-vault\(az-storage\)/output
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
