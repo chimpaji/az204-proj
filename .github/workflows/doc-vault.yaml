@@ -11,6 +11,11 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AZURE_WEBAPP_NAME: web-8d3ebbb5eba8
+  AZURE_WEBAPP_PACKAGE_PATH: 'doc-vault(az-storage)/web-app'
+  NODE_VERSION: '18.x'
+
 jobs:
   build:
     defaults:
@@ -24,7 +29,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: npm install, build, and test
         run: |
@@ -59,7 +64,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'web-8d3ebbb5eba8'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
           publish-profile: ${{ secrets.DOC_VAULT_AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
