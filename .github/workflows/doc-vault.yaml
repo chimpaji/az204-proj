@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Doc vault - Build and deploy Node.js app to Azure Web App - web-8d3ebbb5eba8
 
 on:
@@ -15,6 +12,10 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+env:
+  # grab your Azure Static Web Apps API token from the Azure portal
+  AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.DOC_VAULT_DEPLOYMENT_TOKEN }}
+  AZURE_WEBAPP_PACKAGE_PATH: '/doc-vault-az-storage/web-app'
 
 jobs:
   build_and_deploy_job:
@@ -30,15 +31,12 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.DOC_VAULT_DEPLOYMENT_TOKEN }}
+          azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN}}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: 'upload'
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/doc-vault-az-storage/web-app' # App source code path
+          app_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH}} # App source code path
           api_location: '' # Api source code path - optional
           output_location: '' # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
@@ -48,8 +46,8 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.DOC_VAULT_DEPLOYMENT_TOKEN }}
+          azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN}}
           action: 'close'
-          app_location: '/doc-vault-az-storage/web-app' # App source code path
+          app_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH}} # App source code path
           api_location: '' # Api source code path - optional
           output_location: ''
