@@ -147,8 +147,17 @@ resource "azurerm_windows_function_app" "function_upload_meta_to_cosmos" {
 
   }
   app_settings = {
+    "WEBSITE_NODE_DEFAULT_VERSION" : "~18"
+    "WEBSITE_RUN_FROM_PACKAGE"             = "",
+    "FUNCTIONS_WORKER_RUNTIME"             = "node",
     "DOC_VAULT_STORAGE_CONNECTION_STRING"  = azurerm_storage_account.storage.primary_connection_string
     "DOC_VAULT_COSMOSDB_CONNECTION_STRING" = tolist(azurerm_cosmosdb_account.cosmosdb.connection_strings)[0]
+  }
+
+  lifecycle {
+    ignore_changes = [
+      app_settings["WEBSITE_RUN_FROM_PACKAGE"],
+    ]
   }
 
   depends_on = [azurerm_storage_account.storage, azurerm_cosmosdb_account.cosmosdb, azurerm_service_plan.sp]
