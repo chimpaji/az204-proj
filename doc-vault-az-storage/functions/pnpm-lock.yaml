@@ -8,6 +8,12 @@ dependencies:
   '@azure/functions':
     specifier: ^4.0.0
     version: 4.3.0
+  cryptr:
+    specifier: ^6.3.0
+    version: 6.3.0
+  uuid:
+    specifier: ^9.0.1
+    version: 9.0.1
 
 devDependencies:
   '@types/node':
@@ -117,6 +123,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /cryptr@6.3.0:
+    resolution: {integrity: sha512-TA4byAuorT8qooU9H8YJhBwnqD151i1rcauHfJ3Divg6HmukHB2AYMp0hmjv2873J2alr4t15QqC7zAnWFrtfQ==}
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -274,6 +284,11 @@ packages:
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.1.1
+    dev: false
+
+  /uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
     dev: false
 
   /which@2.0.2:

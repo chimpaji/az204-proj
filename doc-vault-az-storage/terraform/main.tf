@@ -127,7 +127,7 @@ resource "azurerm_cosmosdb_sql_container" "container" {
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.cosmosdb.name
   database_name       = azurerm_cosmosdb_sql_database.database.name
-  partition_key_path  = "/id"
+  partition_key_path  = "/email"
 
   depends_on = [azurerm_cosmosdb_sql_database.database]
 }
