@@ -37,6 +37,8 @@ jobs:
           app_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH}} # App source code path
           api_location: '' # Api source code path - optional
           output_location: '' # Built app content directory - optional
+        env:
+          NEXT_PUBLIC_DOC_VAULT_FUNCTION_DOWNLOAD_URL: ${{ secrets.DOC_VAULT_FUNCTION_DOWNLOAD_URL }}
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest

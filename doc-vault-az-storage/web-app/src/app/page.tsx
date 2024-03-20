@@ -94,7 +94,7 @@ export default async function Home() {
       console.log('Item has been extended', item);
       return true;
     }
-    throw new Error('Item not found');
+    throw new Error('Item not found!');
   }
 
   return (
