@@ -51,3 +51,13 @@ A secure platform where users can upload important documents, assign tags for ea
 11. Setup Application insights and Azure monitor
 12. Push to GitHub
 13. Document
+
+## Azure App Setup Guide
+
+Follow the steps below to set up your Azure App:
+
+1. Fork this repository and clone it to your local machine.
+2. Navigate to the `terraform` folder and run `terraform apply` to provision the required infrastructure.
+3. Obtain the publish key for your Azure Function and save it as a secret named `DOC_VAULT_AZURE_FUNCTIONAPP_PUBLISH_PROFILE` in your GitHub repository. This key will be used by the GitHub Actions workflow to enable continuous integration and deployment for your Azure Function.
+4. Make a commit to trigger the CI/CD workflow. Once the workflow completes, verify that your three Azure Functions have been successfully deployed.
+5. Retrieve the base URL for the `download` function and assign it to the Azure Static Web App that was just created. Set it as the value for the variable `NEXT_PUBLIC_DOC_VAULT_FUNCTION_DOWNLOAD_URL` in your Azure Static Web App configuration (also add it to the local `.env` file).
