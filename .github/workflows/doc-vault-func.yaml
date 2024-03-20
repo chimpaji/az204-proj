@@ -1,4 +1,4 @@
-name: Deploy Node.js function into doc vault function project
+name: Doc vault - Build and deploy Node.js function to Azure Funtions
 
 on:
   push:
