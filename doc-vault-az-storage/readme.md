@@ -1,5 +1,9 @@
 ## Azure Document Vault with Expiry & CDN Integration (Develop for Azure storage)
 
+<!-- show image from ./screenshot.png -->
+
+![screenshot](screenshot.png)
+
 A secure platform where users can upload important documents, assign tags for easier organization, and retrieve them. This enhanced system integrates expiration dates on shared links and utilizes Azure CDN to deliver content efficiently to users across various regions.
 
 ### Infrastructure
@@ -61,3 +65,4 @@ Follow the steps below to set up your Azure App:
 3. Obtain the publish key for your Azure Function and save it as a secret named `DOC_VAULT_AZURE_FUNCTIONAPP_PUBLISH_PROFILE` in your GitHub repository. This key will be used by the GitHub Actions workflow to enable continuous integration and deployment for your Azure Function.
 4. Make a commit to trigger the CI/CD workflow. Once the workflow completes, verify that your three Azure Functions have been successfully deployed.
 5. Retrieve the base URL for the `download` function and assign it to the Azure Static Web App that was just created. Set it as the value for the variable `NEXT_PUBLIC_DOC_VAULT_FUNCTION_DOWNLOAD_URL` in your Azure Static Web App configuration (also add it to the local `.env` file).
+6. Copy the Azure Static Web App deployment token and save it as a secret named `DOC_VAULT_DEPLOYMENT_TOKEN` in your GitHub repository. This token will be used for deploying your Azure Static Web App.
