@@ -1,4 +1,4 @@
-name: Deploy Node.js project to Azure Function App
+name: Deploy Node.js function into doc vault function project
 
 on:
   push:
