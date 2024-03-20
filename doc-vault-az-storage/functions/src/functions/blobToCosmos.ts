@@ -10,8 +10,6 @@ import { Item } from '../config/types';
 import { createHash } from 'crypto';
 import { v4 as uuid } from 'uuid';
 
-// import uuidv4 as uuid from 'uuid/v4';
-
 export async function blobToCosmos(blob: Buffer, context: InvocationContext) {
   console.log('hi');
   context.log(
@@ -24,19 +22,9 @@ export async function blobToCosmos(blob: Buffer, context: InvocationContext) {
     throw new Error('File name is required');
   }
 
-  // Generate the id based on the email and file_name
-  // const id = mockEmail + '_' + fileName;
-
-  const beforeHashedId = `email=${mockEmail}_fileName=${fileName}`;
-  // const hashedId = encrypt(beforeHashedId);
-
-  // const link = `hash
-
   // expiredate is 2hrs from now
   const expirationDate = new Date();
   expirationDate.setHours(expirationDate.getHours() + 2);
-  // const link = `${hashedId}+;expirationDate=${expirationDate}`;
-  // const hashedLink = encrypt(link);
 
   const id = `${mockEmail}_${fileName}`;
   const hashedId = createHash('sha256').update(id).digest('hex');

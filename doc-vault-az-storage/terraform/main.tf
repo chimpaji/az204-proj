@@ -33,9 +33,10 @@ resource "azurerm_static_web_app" "web" {
   depends_on          = [azurerm_resource_group.rg, azurerm_storage_account.storage]
 
   app_settings = {
-    "DOC_VAULT_STORAGE_CONNECTION_STRING" = azurerm_storage_account.storage.primary_connection_string
+    "DOC_VAULT_STORAGE_CONNECTION_STRING"         = azurerm_storage_account.storage.primary_connection_string
+    "DOC_VAULT_COSMOS_CONNECTION_STRING"          = tolist(azurerm_cosmosdb_account.cosmosdb.connection_strings)[0]
+    "NEXT_PUBLIC_DOC_VAULT_FUNCTION_DOWNLOAD_URL" = "UPLOAD_DOC_VAULT_FUNCTION_DOWNLOAD_URL_HERE"
   }
-
 
 }
 
