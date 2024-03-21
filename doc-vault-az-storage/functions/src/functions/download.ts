@@ -11,6 +11,7 @@ import {
   blobContainerName,
   cosmosDBContainerName,
   cosmosDBdbName,
+  useCDN,
 } from '../config';
 
 import { CosmosClient } from '@azure/cosmos';
@@ -20,7 +21,7 @@ export async function download(
   context: InvocationContext
 ): Promise<HttpResponseInit> {
   context.log(`Http function processed request for url "${request.url}"`);
-
+  let downloadLink;
   //   const name = request.query.get('name') || (await request.text()) || 'world';
   const key = request.params.key;
   if (!key) {
@@ -58,7 +59,6 @@ export async function download(
   const { resources: items } = await container.items
     .query(querySpec)
     .fetchAll();
-
   const foundItem = items[0];
   if (!foundItem) {
     return {
@@ -85,11 +85,28 @@ export async function download(
     permissions: BlobSASPermissions.parse('r'),
     expiresOn: new Date(new Date().valueOf() + 86400),
   });
+  downloadLink = sasUrl;
+
+  // Construct the CDN URL with the SAS token
+  if (useCDN) {
+    const cdn_endpoint_fqdn = process.env['DOC_VAULT_CDN_ENDPOINT'];
+    if (!cdn_endpoint_fqdn) {
+      return {
+        status: 500,
+        body: 'CDN Endpoint is not defined',
+      };
+    }
+    const sasToken = sasUrl.split('?')[1];
+    const cdnUrl = `https://${cdn_endpoint_fqdn}/${blobContainerName}/${foundItem.file_name}?${sasToken}`;
+    console.log({ cdnUrl });
+    downloadLink = cdnUrl;
+  }
+
   // redirect to the sas url
   return {
     status: 302,
     headers: {
-      location: sasUrl,
+      location: downloadLink,
     },
   };
 }
